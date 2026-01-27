@@ -1,0 +1,123 @@
+
+import customtkinter as ctk
+
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("green")
+
+app = ctk.CTk()
+app.geometry("300x420")
+app.title("Sign Up")
+
+# ================= FUNCTIONS =================
+def show_success():
+    if name.get() == "" or Email.get() == "" or password.get() == "":
+        return
+    signup_frame.pack_forget()
+    success_frame.pack(fill="both", expand=True)
+
+def back_to_signup():
+    success_frame.pack_forget()
+    signup_frame.pack(fill="both", expand=True)
+
+# ================= SIGNUP PAGE =================
+signup_frame = ctk.CTkFrame(app, fg_color="white")
+signup_frame.pack(fill="both", expand=True)
+
+content = ctk.CTkFrame(signup_frame, fg_color="transparent")
+content.pack(fill="both", expand=True)
+
+ctk.CTkLabel(
+    content,
+    text="WELCOME",
+    font=("Poppins", 26, "bold"),
+    text_color="green"
+).pack(pady=(10, 5))
+
+ctk.CTkLabel(
+    content,
+    text="Create your account",
+    font=("Poppins", 12),
+    text_color="gray"
+).pack(pady=(0, 15))
+
+name = ctk.CTkEntry(
+    content,
+    placeholder_text="Full Name",
+    width=240,
+    height=38,
+    corner_radius=12
+)
+name.pack(pady=6)
+
+Email = ctk.CTkEntry(
+    content,
+    placeholder_text="Email",
+    width=240,
+    height=38,
+    corner_radius=12
+)
+Email.pack(pady=6)
+
+password = ctk.CTkEntry(
+    content,
+    placeholder_text="Password",
+    show="*",
+    width=240,
+    height=38,
+    corner_radius=12
+)
+password.pack(pady=6)
+
+confirm_password = ctk.CTkEntry(
+    content,
+    placeholder_text="Confirm Password",
+    show="*",
+    width=240,
+    height=38,
+    corner_radius=12
+)
+confirm_password.pack(pady=10)
+
+ctk.CTkButton(
+    content,
+    text="SIGN UP",
+    width=240,
+    height=40,
+    corner_radius=20,
+    command=show_success
+).pack(pady=10)
+
+# ================= SUCCESS PAGE =================
+success_frame = ctk.CTkFrame(app, fg_color="white")
+
+ctk.CTkLabel(
+    success_frame,
+    text="Signup Successful 🎉",
+    font=("Poppins", 24, "bold"),
+    text_color="#6BC49A"
+).pack(pady=80)
+
+ctk.CTkButton(
+    success_frame,
+    text="Back",
+    width=200,
+    height=40,
+    corner_radius=20,
+    command=back_to_signup
+).pack()
+
+
+
+def submit():
+    user_Email = Email.get()
+    user_password = password.get()
+    user_name = name.get()
+    user_confirm_password = confirm_password.get()
+
+    print("name:",name)
+    print("Password:", password)
+    print("Email:", Email)
+    print("confirm_Password:", confirm_password)
+
+# submit()
+app.mainloop()

@@ -1,0 +1,60 @@
+
+
+import customtkinter as ctk
+
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("green")
+
+app = ctk.CTk()
+app.geometry("200x300")
+app.title("sign in page")
+
+title = ctk.CTkLabel(
+    app,
+    text="WELCOME BACK",
+    font=("Poppins", 28, "bold"),
+    text_color="green"
+)
+title.pack(pady=(30, 5))   # top & bottom spacing
+
+subheading = ctk.CTkLabel(
+    app,
+    text="Sign in",        # typo fixed
+    font=("Poppins", 12),  # "light" often not supported
+    text_color="gray"
+)
+subheading.pack(pady=(0, 20))
+email = ctk.CTkEntry(app, placeholder_text="Email")
+email.pack(pady=10)
+
+password = ctk.CTkEntry(app, placeholder_text="Password", show="*")
+password.pack(pady=10)
+
+btn = ctk.CTkButton(app, text="Login")
+btn.pack(pady=(20,5))
+
+dashboard_frame = ctk.CTkFrame(app)
+
+dashboard_label = ctk.CTkLabel(
+    dashboard_frame,
+    text="Login Successful 🎉",
+    font=("Poppins", 24, "bold"),
+    text_color="green"
+)
+dashboard_label.pack(pady=40)
+
+def submit():
+    user_email = email.get()
+    user_password = password.get()
+
+    print("Email:", user_email)
+    print("Password:", user_password)
+    dashboard_frame.pack(fill="both", expand=True)
+
+btn.configure(command=submit)
+
+app.mainloop()
+f = open("home screen.jpg", "rb")
+data = f.read()
+print(data)
+f.close()
