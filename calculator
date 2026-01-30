@@ -1,0 +1,59 @@
+##CALCULATOR
+
+
+import tkinter as tk
+
+def click(value):
+    current = entry.get()
+    entry.delete(0, tk.END)
+    entry.insert(0, current + str(value))
+
+def clear():
+    entry.delete(0, tk.END)
+
+def calculate():
+    try:
+        result = eval(entry.get())
+        entry.delete(0, tk.END)
+        entry.insert(0, result)
+    except:
+        entry.delete(0, tk.END)
+        entry.insert(0, "Error")
+
+# Window
+app = tk.Tk()
+app.title("Calculator")
+app.geometry("300x400")
+
+entry = tk.Entry(app, font=("Arial", 20), borderwidth=5, relief="ridge")
+entry.pack(fill="x", padx=10, pady=10)
+
+buttons = [
+    "7","8","9","/",
+    "4","5","6","*",
+    "1","2","3","-",
+    "0",".","=","+"
+]
+
+frame = tk.Frame(app)
+frame.pack()
+
+row = 0
+col = 0
+
+for btn in buttons:
+    if btn == "=":
+        b = tk.Button(frame, text=btn, width=5, height=2, command=calculate)
+    else:
+        b = tk.Button(frame, text=btn, width=5, height=2,
+                      command=lambda x=btn: click(x))
+    b.grid(row=row, column=col, padx=5, pady=5)
+    col += 1
+    if col > 3:
+        col = 0
+        row += 1
+
+clear_btn = tk.Button(app, text="Clear", width=20, height=2, command=clear)
+clear_btn.pack(pady=10)
+
+app.mainloop()
